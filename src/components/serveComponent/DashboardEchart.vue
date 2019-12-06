@@ -25,7 +25,7 @@
             }
         },
         created() {
-            console.log("父组件传过来的值",this.obj)
+            
         },
         mounted() {
             //检测 图标自适应
@@ -34,7 +34,6 @@
         watch: {
             form: {
                 handler: function(val) {
-                    console.log('监听---', val)
                     this.initChart()
                 },
                 deep: true
@@ -48,7 +47,6 @@
                     "pageSize": 1,
                     "whereWord": {}
                 }).then((res) => {
-                    // console.log("返回信息---",res.result.fieldInfos)
                     res.result.fieldInfos.map((item, index) => {})
                 })
             },

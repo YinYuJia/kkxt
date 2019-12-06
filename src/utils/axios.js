@@ -30,7 +30,6 @@ axios.interceptors.request.use(request => {
 axios.interceptors.response.use((response) => {
     loadingInstance.close();
     // token 已过期，重定向到登录页面
-    console.log("response--",response)
     // if(newRes.code == -1 ){
     //     // 系统异常
     //     console.log(newRes.data.msg);

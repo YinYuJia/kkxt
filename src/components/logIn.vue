@@ -34,7 +34,6 @@
     mounted() {
       $('#FORM').on('submit', (e) => {
         e.preventDefault();
-        console.log("this.$util.checkPhone(this.form.username)", this.$util.paramStr('a'))
         $.ajax({
           type: "post",
           url: "/ApiUrl2/sas/api/login",
@@ -46,7 +45,6 @@
             if (data.success) {
               console.log("返回值:", data.data);
               sessionStorage.setItem("token", data.data.token)
-              console.log(sessionStorage.getItem("token"))
               this.$message({
                 message: '登录成功',
                 type: 'success'

@@ -20,7 +20,6 @@
         watch: {
             form: {
                 handler: function(val) {
-                    console.log('监听---', val)
                     this.ElectricityConsumption()
                 },
                 deep: true

@@ -40,16 +40,13 @@
                 let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/"+parmas.id+"/summary",parmas)
                 
                 this.$axios.get(data).then((resData) => {
-                    console.log(resData)
                     let max = null
                     for ( let key in resData) {
-                        console.log(resData[key])
                         resData[key].map((item,index)=>{
-                            console.log("electricity",item.electricity)
                             max+=Number(item.electricity) //用电量相加
                         })
                     }
-                     console.log("max",max)
+                     console.log("电量相加总量",max)
                 }).catch((error) => {
                     console.log(error)
                 })

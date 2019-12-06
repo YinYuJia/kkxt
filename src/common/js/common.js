@@ -6,7 +6,7 @@ import axios from 'axios'
 export default {
     // 登录方法
     login:function(a){
-        console.log(a);
+        
     },
     // 公用请求地址
 
