@@ -9,7 +9,7 @@
       </div>
       <el-form :model="form" label-width="80px" id="FORM" style="margin-top:0.15rem" action="/ApiUrl2/sas/api/login" method="post">
       <el-form-item label="用户名" prop="username" hide-required-asterisk>
-        <el-input v-model="form.username" name="username" clearable placeholder="请输入用户名" suffix-icon="el-icon-date"></el-input>
+        <el-input v-model="form.username" name="username" clearable placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="passwoed">
         <el-input v-model="form.password" name="password" clearable placeholder="请输入密码"></el-input>
