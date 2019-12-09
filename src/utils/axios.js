@@ -19,7 +19,7 @@ axios.interceptors.request.use(request => {
     if( token) {
         request.headers['AUTHORIZATION'] = token
     }
-    request.baseURL = process.env.baseURL
+    // request.baseURL = process.env.baseURL
     return request;
 
 });
