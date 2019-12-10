@@ -28,7 +28,7 @@
       return {
         form: {
           username: "test",
-          password: "1"
+          password: "12qwE3!!"
         }
       }
     },
