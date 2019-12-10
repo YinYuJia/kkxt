@@ -9,14 +9,15 @@
       </div>
       <el-form :model="form" label-width="80px" id="FORM" style="margin-top:0.15rem" action="/ApiUrl2/sas/api/login" method="post">
       <el-form-item label="用户名" prop="username" hide-required-asterisk>
-        <el-input v-model="form.username" name="username" clearable placeholder="请输入用户名"></el-input>
+        <el-input v-model="form.username" value="test" name="username" clearable placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="passwoed">
-        <el-input v-model="form.password" name="password" clearable placeholder="请输入密码"></el-input>
+        <el-input v-model="form.password" value="1" name="password" clearable placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-button type="submit" class="btn">立即登录</el-button>
     </el-form>
     </div>
+    <div class="mast"></div>
   </div>
 </template>
 
@@ -26,8 +27,8 @@
     data() {
       return {
         form: {
-          username: "",
-          password: ""
+          username: "test",
+          password: "1"
         }
       }
     },
@@ -35,13 +36,7 @@
     created() {
       // this.getAllRoom()
       console.log("this.$store.state", this.$store.getters.SET_USER_BASEINFO)
-
-    },
-    //生命周期 - 挂载完成（访问DOM元素）
-    mounted() {
-      $('#FORM').on('submit', (e) => {
-        e.preventDefault();
-        $.ajax({
+                   $.ajax({
           type: "post",
           url: "/ApiUrl2/sas/api/login",
           data: {
@@ -63,7 +58,61 @@
             }
           }
         });
-      })
+    },
+    //生命周期 - 挂载完成（访问DOM元素）
+    mounted() {
+      // $('#FORM').submit(function(e) {
+      //      e.preventDefault();
+      //              $.ajax({
+      //     type: "post",
+      //     url: "/ApiUrl2/sas/api/login",
+      //     data: {
+      //       username: this.form.username, //把表单填写值放这里传到后端
+      //       password: this.form.password //把表单填写值放这里传到后端
+      //     },
+      //     success: (data) => {
+      //       if (data.success) {
+      //         console.log("返回值:", data.data);
+      //         sessionStorage.setItem("token", data.data.token)
+      //         this.$message({
+      //           message: '登录成功',
+      //           type: 'success'
+      //         });
+      //         this.$router.push({
+      //           name: 'index',
+      //           params: {}
+      //         })
+      //       }
+      //     }
+      //   });
+      // })
+      // 手动提交
+      // $('#FORM').on('submit', (e) => {
+      //   e.preventDefault();
+      //   console.log(11111)
+      //   $.ajax({
+      //     type: "post",
+      //     url: "/ApiUrl2/sas/api/login",
+      //     data: {
+      //       username: this.form.username, //把表单填写值放这里传到后端
+      //       password: this.form.password //把表单填写值放这里传到后端
+      //     },
+      //     success: (data) => {
+      //       if (data.success) {
+      //         console.log("返回值:", data.data);
+      //         sessionStorage.setItem("token", data.data.token)
+      //         this.$message({
+      //           message: '登录成功',
+      //           type: 'success'
+      //         });
+      //         this.$router.push({
+      //           name: 'index',
+      //           params: {}
+      //         })
+      //       }
+      //     }
+      //   });
+      // })
     },
     methods: {
       //登录
@@ -91,6 +140,15 @@
   // element {
   //   margin-top: 0 !important;
   // }
+  .mast {
+    height: 10.8rem;
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
   html,body {
     padding: 0;
     margin-top: 0;
