@@ -28,10 +28,10 @@
                                     y2: 1,
                                     colorStops: [{
                                         offset: 0,
-                                        color: 'rgba(40,205,156,1)' // 0% 处的颜色
+                                        color: 'rgba(247,160,80,1)' // 0% 处的颜色
                                     }, {
                                         offset: 1,
-                                        color: 'rgba(40,205,156,0)' // 100% 处的颜色
+                                        color: 'rgba(247,160,80,0)' // 100% 处的颜色
                                     }],
                                     global: false // 缺省为 false
                                 }

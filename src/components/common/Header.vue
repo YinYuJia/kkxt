@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="header">
-    <p class="p">配变站所空开平台</p>
+    <p class="p">空开平台</p>
   </div>
 </template>
 

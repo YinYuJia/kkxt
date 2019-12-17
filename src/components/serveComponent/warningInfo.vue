@@ -9,7 +9,6 @@
         <div class="left_info">
             <div id="left_info_box">
                 <p v-for="item in 1000" :key="item.index" class="left_info_p"> <span>{{item}}房间</span> <span>三相不平衡</span> <span>2019-10-10 13:30</span> </p>
-
             </div>
         </div>
     </div>
