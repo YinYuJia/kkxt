@@ -5,9 +5,9 @@
         <div class="p2"></div>
         <div class="p3">
             <p class="p3_1">昨日用电量</p>
-            <p class="p3_2">1QW/H</p>
+            <p class="p3_2">{{powerInfoData.yestoday}}QW/H</p>
             <p class="p3_3">今日用电量</p>
-            <p class="p3_4">1Q33W/H</p>
+            <p class="p3_4">{{powerInfoData.today}}QW/H</p>
         </div>
         <div class="p4">
             <span class="today"><img style="margin-right:.05rem" src="../../assets/imgs/today.png" alt="">今日用电量</span>
@@ -18,39 +18,25 @@
 
 <script>
     export default {
+        props:{
+            powerInfoData:{
+                default:{},
+                type:Object
+            }
+        },
         data() {
-            return {}
+            return {
+                yestoday:"",
+                today:""
+            }
         },
         //生命周期 - 创建完成（访问当前this实例）
         created() {
-            //获取电量数据
-            this.getElectricity()
+          console.log("父组件传值----",this.powerInfoData)
         },
         //生命周期 - 挂载完成（访问DOM元素）
-        mounted() {
-        },
+        mounted() {},
         methods: {
-            getElectricity() {
-                let parmas = {
-                    "start":"2019-12-05",
-                    "end":"2019-12-05",
-                    "kind":"HOURLY",
-                    "id":136
-                }
-                let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/"+parmas.id+"/summary",parmas)
-                
-                this.$axios.get(data).then((resData) => {
-                    let max = null
-                    for ( let key in resData) {
-                        resData[key].map((item,index)=>{
-                            max+=Number(item.electricity) //用电量相加
-                        })
-                    }
-                     console.log("电量相加总量",max)
-                }).catch((error) => {
-                    console.log(error)
-                })
-            }
 
         }
     }

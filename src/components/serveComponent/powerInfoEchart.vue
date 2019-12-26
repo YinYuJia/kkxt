@@ -7,6 +7,12 @@
 <script>
     export default {
         name: 'hello',
+        props:{
+            powerInfoData:{
+                default:{},
+                type:Object
+            }
+        },
         data() {
             return {
                 style: {

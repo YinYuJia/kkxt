@@ -1,72 +1,81 @@
 <!--  -->
 <template>
     <div class="left">
-         <div class="p"> <img class="img" src="../../assets/imgs/icon.png" alt=""> 电量信息分析 </div>
-         <div class="p2"></div>
-         <DashboardEchart class="DashboardEchart" :obj="{
-             'id':'DashboardEchart1',
-             'name':'电压异常',
-             'data':'70',
-             'color':{
-                 'start':'#00ffff',
-                  'end':'#0052ff'
-             }
-         }"></DashboardEchart>
-
-         <DashboardEchart class="DashboardEchart" :obj="{
-             'id':'DashboardEchart2',
-             'name':'电流异常',
-             'data':'40',
-             'color':{
-                 'start':'#00ffff',
-                  'end':'#6ABD87'
-             }
-         }"></DashboardEchart>
-
-         <DashboardEchart class="DashboardEchart" :obj="{
-             'id':'DashboardEchart3',
-             'name':'功率异常',
-             'data':'48',
-             'color':{
-                 'start':'#00ffff',
-                  'end':'#C2AC3E'
-             }
-         }"></DashboardEchart>
-
-         <DashboardEchart class="DashboardEchart" :obj="{
-             'id':'DashboardEchart4',
-             'name':'温度异常',
-             'data':'26',
-             'color':{
-                 'start':'#00ffff',
-                  'end':'#D95373'
-             }
-         }"></DashboardEchart>
-         
-         <!-- <DashboardEchart></DashboardEchart>
-         <DashboardEchart></DashboardEchart>
-         <DashboardEchart></DashboardEchart> -->
+        <div class="p"> <img class="img" src="../../assets/imgs/icon.png" alt=""> 告警信息分析 </div>
+        <div class="p2"></div>
+        <DashboardEchart class="DashboardEchart" :obj="{
+                 'id':'DashboardEchart1',
+                 'name':'电压异常',
+                 'data':'70',
+                 'color':{
+                     'start':'#00ffff',
+                      'end':'#0052ff'
+                 }
+             }"></DashboardEchart>
+        <DashboardEchart class="DashboardEchart" :obj="{
+                 'id':'DashboardEchart2',
+                 'name':'电流异常',
+                 'data':'40',
+                 'color':{
+                     'start':'#00ffff',
+                      'end':'#6ABD87'
+                 }
+             }"></DashboardEchart>
+        <DashboardEchart class="DashboardEchart" :obj="{
+                 'id':'DashboardEchart3',
+                 'name':'功率异常',
+                 'data':'48',
+                 'color':{
+                     'start':'#00ffff',
+                      'end':'#C2AC3E'
+                 }
+             }"></DashboardEchart>
+        <DashboardEchart class="DashboardEchart" :obj="{
+                 'id':'DashboardEchart4',
+                 'name':'温度异常',
+                 'data':'26',
+                 'color':{
+                     'start':'#00ffff',
+                      'end':'#D95373'
+                 }
+             }"></DashboardEchart>
+        <!-- <DashboardEchart></DashboardEchart>
+             <DashboardEchart></DashboardEchart>
+             <DashboardEchart></DashboardEchart> -->
     </div>
 </template>
 
 <script>
-import DashboardEchart from "./DashboardEchart"
+    import DashboardEchart from "./DashboardEchart"
     export default {
-        components:{
+        components: {
             DashboardEchart,
         },
         data() {
-            return {
-            }
+            return {}
         },
         //生命周期 - 创建完成（访问当前this实例）
         created() {
+            this.getElectricity()
         },
         //生命周期 - 挂载完成（访问DOM元素）
         mounted() {
-            
         },
         methods: {
+            getElectricity() {
+                let parmas = {
+                    "id": 6
+                }
+                let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/switches", parmas)
+                this.$axios.get(data).then((resData) => {
+                    console.log("设备状态返回信息---", resData)
+                    resData.map((item, index) => {
+                        console.log(item.state.status)
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
         }
     }
 </script>
@@ -87,7 +96,7 @@ import DashboardEchart from "./DashboardEchart"
         .p2 {
             width: 3.9rem;
             height: .08rem;
-             background: url("../../assets/imgs/p2Img.png") no-repeat ;
+            background: url("../../assets/imgs/p2Img.png") no-repeat;
             background-size: 100% 100%;
         }
         .DashboardEchart {

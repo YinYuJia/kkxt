@@ -9,16 +9,23 @@
 
 <script>
     export default {
+        props: {
+            AllList: {
+                type: Array,
+                default: []
+            }
+        },
         data() {
             return {
                 style1: {
                     "width": "3.9rem",
                     "height": "3rem"
                 },
+                listData: [],
             }
         },
         watch: {
-            form: {
+            listData: {
                 handler: function(val) {
                     this.ElectricityConsumption()
                 },
@@ -26,12 +33,35 @@
             },
         },
         //生命周期 - 创建完成（访问当前this实例）
-        created() {},
+        created() {
+            console.log("AllList----------------", this.AllList)
+            let temList = this.maopao(this.AllList)
+            console.log("temList----", temList)
+            temList.map((item, index) => {
+                if(index <5 ) {
+                console.log("item.elec tricity", item.electricity)
+                this.listData.push(item.electricity)
+                }
+            })
+            console.log("listData---", this.listData)
+        },
         //生命周期 - 挂载完成（访问DOM元素）
         mounted() {
             this.ElectricityConsumption()
         },
         methods: {
+            maopao(arr1) {
+                for (var i = 1; i <= arr1.length - 1; i++) { //外层循环管排序的次数
+                    for (var j = 0; j <= arr1.length - i - 1; j++) {
+                        if (arr1[j].electricity <= arr1[j + 1].electricity) {
+                            var temp = arr1[j];
+                            arr1[j] = arr1[j + 1];
+                            arr1[j + 1] = temp;
+                        }
+                    }
+                }
+                return arr1
+            },
             ElectricityConsumption() {
                 //这句申明建议写到外面去
                 this.ElectricityConsumptionChart = this.$echarts.init(document.getElementById("ElectricityConsumption"))
@@ -90,10 +120,10 @@
                         name: '开关用电量TOP5',
                         type: 'bar',
                         barWidth: '60%',
-                        data: [5, 4, 3, 2, 1],
+                        data: this.listData,
                         itemStyle: { //柱样式
                             normal: {
-                                color:"#82E2C6",
+                                color: "#82E2C6",
                                 barBorderRadius: [2, 2, 0, 0],
                                 label: {
                                     show: true,
@@ -108,9 +138,8 @@
                         }
                     }]
                 });
-                
                 window.onresize = this.ElectricityConsumptionChart.resize // 加这行代码，没错！
-                window.addEventListener("resize", ()=> {
+                window.addEventListener("resize", () => {
                     this.ElectricityConsumptionChart.resize();
                 });
             }

@@ -115,6 +115,34 @@ function ParameterMatching(url, param) {
   urlLink = url + "?" + urlLink.substr(1);
   return urlLink.replace(' ', '');
  }
+//获取昨天日期 //    -1 代表前一天，-2前两天...
+ function getDay(num, str) {
+  var today = new Date();
+  var nowTime = today.getTime();
+  var ms = 24*3600*1000*num;
+  today.setTime(parseInt(nowTime + ms));
+  var oYear = today.getFullYear();
+  var oMoth = (today.getMonth() + 1).toString();
+  if (oMoth.length <= 1) oMoth = '0' + oMoth;
+  var oDay = today.getDate().toString();
+  if (oDay.length <= 1) oDay = '0' + oDay;
+  return oYear + str + oMoth + str + oDay;
+}
+
+// 冒泡排序
+function maopao(arr1) { 
+  for(var i=1;i<=arr1.length-1;i++){ //外层循环管排序的次数
+      for(var j=0;j<=arr1.length-i-1;j++){
+          if(arr1[j].electricity<=arr1[j+1].electricity){
+              var temp=arr1[j];
+              arr1[j]=arr1[j+1];
+              arr1[j+1]=temp;
+          }
+      }
+  }
+  return arr1
+  }
+
 
  
 
@@ -129,5 +157,7 @@ export default {
   idCard,
   paramStr,
   checkMail,
-  ParameterMatching
+  ParameterMatching,
+  getDay,
+  maopao
 }
