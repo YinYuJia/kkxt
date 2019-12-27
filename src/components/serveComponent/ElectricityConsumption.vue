@@ -27,6 +27,15 @@
         watch: {
             AllList: {
                 handler: function(val) {
+                    console.log("val监听----",val)
+                    let temList = this.maopao(this.AllList)
+                    console.log("temList----", temList)
+            for( let i = 0 ; i < temList.length ; i++) {
+                if(i <5 ) {
+                console.log("item.elec tricity", temList[i].electricity)
+                this.listData.push(temList[i].electricity)
+                }
+            }
                     this.ElectricityConsumption()
                 },
                 deep: true
@@ -37,12 +46,12 @@
             console.log("AllList----------------", this.AllList)
             let temList = this.maopao(this.AllList)
             console.log("temList----", temList)
-            temList.map((item, index) => {
-                if(index <5 ) {
-                console.log("item.elec tricity", item.electricity)
-                this.listData.push(item.electricity)
+            for( let i = 0 ; i < temList.length ; i++) {
+                if(i <5 ) {
+                console.log("item.elec tricity", temList[i].electricity)
+                this.listData.push(temList[i].electricity)
                 }
-            })
+            }
             console.log("listData---", this.listData)
         },
         //生命周期 - 挂载完成（访问DOM元素）
