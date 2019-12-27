@@ -46,16 +46,20 @@
                     "id": 6
                 }
                 let OBL = []
-            let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/switches", parmas)
+            let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/infos", parmas)
             this.$axios.get(data).then((resData) => {
                 console.log("设备状态返回信息---报警-----", resData)
-                resData.map((item,index)=>{
-                    OBL.push({
-                        name:item.alias,
-                        wringType:item.state.status[0].name,
-                        time:item.state.time
+                if( resData.length != 0) {
+
+                    resData.map((item,index)=>{
+                        OBL.push({
+                            name:item.switchName,
+                            wringType:item.alarm.name,
+                            time:item.time
+                        })
                     })
-                })
+                }
+                
                 console.log("dataObj-----",OBL)
                 this.dataList = OBL
             }).catch((error) => {

@@ -20,7 +20,7 @@
         <div class="bangonglou_contaner2" v-if="!isBangonglou_contaner">
             <div class="bangonglou_contaner2_left">
                 <ul>
-                    <li :class="{bangonglou_contaner2_right_li:true,bangonglou_contaner2_right_li_bg:item == 5 || item == 7}" v-for="item in 12"  :key="item.index">
+                    <li :class="{bangonglou_contaner2_right_li:true,bangonglou_contaner2_right_li_bg:item == 5 || item == 7}" v-for="item in 12" :key="item.index">
                         <div class="bangonglou_contaner2_right_li_lv">
                             <img src="../../assets/imgs/lv.png" alt="">
                         </div>
@@ -62,7 +62,9 @@
             }
         },
         //生命周期 - 创建完成（访问当前this实例）
-        created() {},
+        created() {
+            
+        },
         //生命周期 - 挂载完成（访问DOM元素）
         mounted() {},
         methods: {
@@ -73,6 +75,22 @@
             floolClick(data) {
                 this.isBangonglou_contaner = false
                 console.log("data---", data)
+                if( data == 1) {
+                    // this.getInfo()
+                }
+            },
+            getInfo() {
+                let parmas = {
+                    "id": 6
+                }
+                let OBL = []
+                let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/infos", parmas)
+                this.$axios.get(data).then((resData) => {
+                    console.log("设备状态返回信息---中间-----", resData)
+
+                }).catch((error) => {
+                    console.log(error)
+                })
             }
         }
     }
@@ -162,8 +180,7 @@
             width: 100%;
             .bangonglou_contaner2_left {
                 width: 3.2rem;
-                height: 6.4rem;
-                // background-color: red;
+                height: 6.4rem; // background-color: red;
                 float: left;
                 padding-left: .3rem;
                 ul {
@@ -178,8 +195,7 @@
                         cursor: pointer;
                         .bangonglou_contaner2_right_li_lv {
                             height: .3rem;
-                            width: .3rem;
-                            // background-color: yellow;
+                            width: .3rem; // background-color: yellow;
                             position: absolute;
                             left: 0;
                             top: 0;
@@ -187,13 +203,12 @@
                                 position: absolute;
                                 left: 50%;
                                 top: 50%;
-                                transform: translate(-50%,-50%);
+                                transform: translate(-50%, -50%);
                             }
                         }
                         .bangonglou_contaner2_right_li_hong {
                             height: .3rem;
-                            width: .3rem;
-                            // background-color: #0ff;
+                            width: .3rem; // background-color: #0ff;
                             position: absolute;
                             left: 0;
                             bottom: 0;
@@ -201,18 +216,18 @@
                                 position: absolute;
                                 left: 50%;
                                 top: 50%;
-                                transform: translate(-50%,-50%);
+                                transform: translate(-50%, -50%);
                             }
                         }
                         .bangonglou_contaner2_right_li_title {
                             width: 100%;
-                             position: absolute;
-                                left: 50%;
-                                top: 50%;
-                                transform: translate(-50%,-50%);
-                                font-size: .16rem;
-                                color: #4BFEFE;
-                                text-align: center;
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: .16rem;
+                            color: #4BFEFE;
+                            text-align: center;
                         }
                     }
                     .bangonglou_contaner2_right_li_bg {
