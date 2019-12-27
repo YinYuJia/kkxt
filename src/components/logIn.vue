@@ -45,7 +45,6 @@
           },
           success: (data) => {
             if (data.success) {
-              console.log("返回值:", data.data);
               sessionStorage.setItem("token", data.data.token)
               this.$message({
                 message: '登录成功',

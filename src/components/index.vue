@@ -50,8 +50,6 @@
         let yestoday = this.$util.getDay(-1, "-")
         let today = this.$util.getDay(0, "-")
         let parmas = {}
-        console.log("yestoday---", yestoday)
-        console.log("today---", today)
         if (str == "yestoday") {
           parmas = {
             "start": yestoday,

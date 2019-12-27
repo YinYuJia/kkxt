@@ -75,14 +75,12 @@
                 
                 let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/switches", parmas)
                 this.$axios.get(data).then((resData) => {
-                    console.log("设备状态返回信息---", resData)
                     let newArr = []
                     resData.map((item, index) => {
                         item.state.status.map((item1,index1)=>{
                             newArr.push(item1)
                         })
                     })
-                    console.log("newArr",newArr)
                     newArr.map((item,index)=>{
                         if( item.code == "ALARM_TEMPERATURE" ) {
                             this.wenduObj.data++  //温度报警
