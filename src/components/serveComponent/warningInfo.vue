@@ -8,7 +8,7 @@
         </div>
         <div class="left_info">
             <div id="left_info_box">
-                <p v-for="item in 1000" :key="item.index" class="left_info_p"> <span>{{item}}房间</span> <span>三相不平衡</span> <span>2019-10-10 13:30</span> </p>
+                <p v-for="item in dataList" :key="item.index" class="left_info_p"> <span>{{item.name}}</span> <span>{{item.wringType}}</span> <span style="overFlow:hidden">{{item.time}}</span> </p>
             </div>
         </div>
     </div>
@@ -18,27 +18,64 @@
     export default {
         data() {
             return {
-                timer:null
+                timer: null,
+                dataList: [{
+                        name: "开关站1",
+                        wringType: "三相不平衡",
+                        time: "2019-10-10 13:30"
+                    },
+                    {
+                        name: "开关站2",
+                        wringType: "三相不平衡",
+                        time: "2019-10-10 13:30"
+                    },
+                    {
+                        name: "开关站3",
+                        wringType: "三相不平衡",
+                        time: "2019-10-10 13:30"
+                    },
+                ]
             }
         },
-        
         destroyed() {
             clearInterval(this.timer)
         },
         //生命周期 - 创建完成（访问当前this实例）
-        created() {},
+        created() {
+            let parmas = {
+                    "id": 6
+                }
+                let OBL = []
+            let data = this.$util.ParameterMatching("/ApiUrl2/sas/api/switch-box/" + parmas.id + "/switches", parmas)
+            this.$axios.get(data).then((resData) => {
+                console.log("设备状态返回信息---报警-----", resData)
+                resData.map((item,index)=>{
+                    OBL.push({
+                        name:item.alias,
+                        wringType:item.state.status[0].name,
+                        time:item.state.time
+                    })
+                })
+                console.log("dataObj-----",OBL)
+                this.dataList = OBL
+            }).catch((error) => {
+                console.log(error)
+            })
+        },
         //生命周期 - 挂载完成（访问DOM元素）
         mounted() {
             let cont = 0
-            this.timer =  setInterval(()=>{ 
-                cont++
-             $("#left_info_box").animate({marginTop:-0.35*cont  + "rem"},1000,function () {
-          
-            });
-            if(cont >= $("#left_info_box .left_info_p").length  ) {
-                cont = 0
+            if (this.dataList.length >= 13) {
+                this.timer = setInterval(() => {
+                    cont++
+                    $("#left_info_box").animate({
+                        marginTop: -0.35 * cont + "rem"
+                    }, 1000, function() {});
+                    if (cont >= $("#left_info_box .left_info_p").length) {
+                        cont = 0
+                    }
+                }, 1000)
             }
-            },1000)
         },
         methods: {}
     }
@@ -96,8 +133,7 @@
             }
         }
         .left_info {
-            height: 4rem;
-            // background-color: rgba(0, 0, 0, .3);
+            height: 4rem; // background-color: rgba(0, 0, 0, .3);
             border-bottom: 2px dashed #ccc;
             overflow: hidden;
             .left_info_p {
@@ -119,6 +155,12 @@
                 }
                 span:nth-child(3) {
                     width: 49.5%;
+                    overflow: hidden;
+                            overflow: hidden; 
+        text-overflow: ellipsis; 
+        -o-text-overflow: ellipsis;
+        white-space:nowrap;
+        display:block;
                 }
             }
         }

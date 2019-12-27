@@ -25,7 +25,7 @@
             }
         },
         watch: {
-            listData: {
+            AllList: {
                 handler: function(val) {
                     this.ElectricityConsumption()
                 },

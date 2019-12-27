@@ -32,7 +32,7 @@
             this.initChart()
         },
         watch: {
-            form: {
+            obj: {
                 handler: function(val) {
                     this.initChart()
                 },
