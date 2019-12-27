@@ -4,7 +4,7 @@
         <div class="p"> <img class="img" src="../../assets/imgs/icon.png" alt=""> 电量信息分析 <span class="infomation">详情 <img class="infomationImg" src="../../assets/imgs/toRight.png" alt=""></span> </div>
         <div class="p2"></div>
         <div class="left_title">
-            <span>房间</span> <span>告警事件</span> <span>告警时间</span>
+            <span>开关</span> <span>告警事件</span> <span>告警时间</span>
         </div>
         <div class="left_info">
             <div id="left_info_box">
@@ -59,7 +59,7 @@
                         })
                     })
                 }
-                
+
                 console.log("dataObj-----",OBL)
                 this.dataList = OBL
             }).catch((error) => {
